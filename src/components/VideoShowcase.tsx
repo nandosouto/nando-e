@@ -1,11 +1,44 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
 
 const VideoShowcase: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+
+  useEffect(() => {
+    // Load Wistia scripts
+    const script1 = document.createElement('script');
+    script1.src = 'https://fast.wistia.com/player.js';
+    script1.async = true;
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.src = 'https://fast.wistia.com/embed/89dog9jlcw.js';
+    script2.async = true;
+    script2.type = 'module';
+    document.head.appendChild(script2);
+
+    // Add Wistia styles
+    const style = document.createElement('style');
+    style.textContent = `
+      wistia-player[media-id='89dog9jlcw']:not(:defined) { 
+        background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/89dog9jlcw/swatch'); 
+        display: block; 
+        filter: blur(5px); 
+        padding-top:56.25%; 
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      // Cleanup scripts and styles on unmount
+      document.head.removeChild(script1);
+      document.head.removeChild(script2);
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <section id="video-showcase" className="relative py-20 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
@@ -31,63 +64,10 @@ const VideoShowcase: React.FC = () => {
           {/* Video Frame */}
           <div 
             className="relative bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 group-hover:border-rose-500/30 transition-all duration-500"
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => setShowControls(false)}
           >
-            {/* Video Placeholder */}
-            <div className="aspect-video relative bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:24px_24px]"></div>
-              </div>
-              
-              {/* Video Preview/Thumbnail */}
-              <div className="relative z-10 text-center">
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-rose-500 to-pink-500 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer group/play">
-                  <Play className="w-10 h-10 text-white ml-1 group-hover/play:scale-110 transition-transform duration-200" fill="currentColor" />
-                </div>
-                <p className="text-gray-400 mt-6 text-lg">Clique para assistir nossa história</p>
-              </div>
-            </div>
-
-            {/* Video Controls Overlay */}
-            <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="flex items-center justify-center w-12 h-12 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-200 backdrop-blur-sm"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-6 h-6 text-white" />
-                    ) : (
-                      <Play className="w-6 h-6 text-white ml-0.5" fill="currentColor" />
-                    )}
-                  </button>
-                  
-                  <button
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="flex items-center justify-center w-10 h-10 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-200 backdrop-blur-sm"
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-                </div>
-
-                <button className="flex items-center justify-center w-10 h-10 bg-white/10 rounded-full hover:bg-white/20 transition-colors duration-200 backdrop-blur-sm">
-                  <Maximize className="w-5 h-5 text-white" />
-                </button>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mt-4">
-                <div className="w-full bg-white/20 rounded-full h-1">
-                  <div className="bg-gradient-to-r from-rose-400 to-pink-400 h-1 rounded-full" style={{ width: '35%' }}></div>
-                </div>
-              </div>
+            {/* Wistia Video Player */}
+            <div className="aspect-video relative">
+              <wistia-player media-id="89dog9jlcw" aspect="1.7777777777777777" className="w-full h-full"></wistia-player>
             </div>
           </div>
         </div>
