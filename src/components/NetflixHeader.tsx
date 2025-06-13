@@ -25,7 +25,7 @@ const NetflixHeader: React.FC = () => {
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
               <Heart className="w-8 h-8 text-rose-400" fill="currentColor" />
-              <span className="text-2xl font-bold text-white">Love</span>
+              <span className="text-2xl font-bold text-white">Nando</span>
               <span className="text-2xl font-bold text-rose-400">Flix</span>
             </div>
           </div>
