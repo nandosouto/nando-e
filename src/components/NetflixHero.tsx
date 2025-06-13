@@ -3,6 +3,16 @@ import React from 'react';
 import { Play, Info, Heart } from 'lucide-react';
 
 const NetflixHero: React.FC = () => {
+  const scrollToVideo = () => {
+    const videoSection = document.querySelector('#video-showcase');
+    if (videoSection) {
+      videoSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen bg-black overflow-hidden">
       {/* Background with gradient overlay */}
@@ -43,7 +53,10 @@ const NetflixHero: React.FC = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="group flex items-center justify-center px-8 py-4 bg-white text-black rounded font-bold text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+            <button 
+              onClick={scrollToVideo}
+              className="group flex items-center justify-center px-8 py-4 bg-white text-black rounded font-bold text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-2xl"
+            >
               <Play className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-200" fill="currentColor" />
               Assistir Agora
             </button>

@@ -8,7 +8,7 @@ const VideoShowcase: React.FC = () => {
   const [showControls, setShowControls] = useState(true);
 
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
+    <section id="video-showcase" className="relative py-20 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
