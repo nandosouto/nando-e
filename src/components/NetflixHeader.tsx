@@ -35,15 +35,6 @@ const NetflixHeader: React.FC = () => {
             <a href="#inicio" className="text-white hover:text-rose-400 transition-colors duration-300 font-medium">
               Início
             </a>
-            <a href="#nossos-videos" className="text-white hover:text-rose-400 transition-colors duration-300 font-medium">
-              Nossos Vídeos
-            </a>
-            <a href="#memorias" className="text-white hover:text-rose-400 transition-colors duration-300 font-medium">
-              Memórias
-            </a>
-            <a href="#sobre" className="text-white hover:text-rose-400 transition-colors duration-300 font-medium">
-              Nossa História
-            </a>
           </nav>
 
           {/* Profile */}
@@ -69,15 +60,6 @@ const NetflixHeader: React.FC = () => {
           <nav className="pt-4 pb-2 space-y-3">
             <a href="#inicio" className="block text-white hover:text-rose-400 transition-colors duration-300 py-2">
               Início
-            </a>
-            <a href="#nossos-videos" className="block text-white hover:text-rose-400 transition-colors duration-300 py-2">
-              Nossos Vídeos
-            </a>
-            <a href="#memorias" className="block text-white hover:text-rose-400 transition-colors duration-300 py-2">
-              Memórias
-            </a>
-            <a href="#sobre" className="block text-white hover:text-rose-400 transition-colors duration-300 py-2">
-              Nossa História
             </a>
           </nav>
         </div>
